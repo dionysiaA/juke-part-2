@@ -103,7 +103,6 @@ export default class AppContainer extends Component {
   }
 
   render () {
-    { console.log(this.props.children) }
     return (
       <div id="main" className="container-fluid">
         <div className="col-xs-2">

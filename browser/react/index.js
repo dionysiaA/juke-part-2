@@ -10,6 +10,7 @@ ReactDOM.render(
     <Redirect from='/' to='/albums' />
     <Route path="/" component={AppContainer}>
       <Route path='/albums' component={Albums} />
+      <Route path="albums/:albumId" component={Album} />
     </Route>
   </Router>,
   document.getElementById('app')
