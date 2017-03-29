@@ -1,37 +1,29 @@
 import React from 'react';
 import Songs from '../components/Songs';
 import axios from 'axios';
+import { Component } from 'react';
+import { convertAlbum } from '../utils';
 
-export default class AppContainer extends Component  {
-  constructor (props) {
-    super(props);
-  }
-  //props.params.albumId
-  // console.log(props, 'album')
-  // const album = props.album;
-  // const currentSong = props.currentSong;
-  // const isPlaying = props.isPlaying;
-  // const toggleOne = props.toggleOne;
+export default class Album extends Component  {
 
   componentDidMount() {
-    axios.get(`/api/albums/${props.routeParams.albumId}`)
-      .then(res => res.data)
-      .then(album => this.setState({
-        selectedAlbum: convertAlbum(album)
-      }));
+    let albumId = +this.props.params.albumId;
+    this.props.selectedAlbum( albumId);
   }
+
   render(){
     return (
       <div className="album">
         <div>
-          <h3>{ album.name }</h3>
-          <img src={ album.imageUrl } className="img-thumbnail" />
+          <h3>{ this.props.album.name }</h3>
+          <img src={ this.props.album.imageUrl } className="img-thumbnail" />
         </div>
         <Songs
-          songs={album.songs}
-          currentSong={currentSong}
-          isPlaying={isPlaying}
-          toggleOne={toggleOne} />
+          songs={this.props.album.songs}
+          currentSong={this.props.currentSong}
+          isPlaying={this.props.isPlaying}
+          toggleOne={this.props.toggleOne}
+        />
       </div>
     )
   }
