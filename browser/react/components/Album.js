@@ -7,6 +7,7 @@ import { convertAlbum } from '../utils';
 export default class Album extends Component  {
 
   componentDidMount() {
+    console.log(this.props)
     let albumId = +this.props.params.albumId;
     this.props.selectedAlbum( albumId);
   }
@@ -28,4 +29,3 @@ export default class Album extends Component  {
     )
   }
 }
-

@@ -8,6 +8,7 @@ import Albums from '../components/Albums.js';
 import Album from '../components/Album';
 import Sidebar from '../components/Sidebar';
 import Player from '../components/Player';
+import Artists from '../components/Artists';
 
 import { convertAlbum, convertAlbums, skip } from '../utils';
 
@@ -21,6 +22,7 @@ export default class AppContainer extends Component {
     this.toggleOne = this.toggleOne.bind(this);
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
+    this.getArtists = this.getArtists.bind(this);
     this.selectAlbum = this.selectAlbum.bind(this);
     this.deselectAlbum = this.deselectAlbum.bind(this);
   }
@@ -98,6 +100,14 @@ export default class AppContainer extends Component {
       }));
   }
 
+  getArtists () {
+    axios.get(`/api/artists`)
+      .then(res => res.data)
+      .then(allArtists => this.setState({
+        artists: allArtists
+      }));
+  }
+
   deselectAlbum () {
     this.setState({ selectedAlbum: {}});
   }
@@ -120,7 +130,11 @@ export default class AppContainer extends Component {
 
               // albums
               albums: this.state.albums,
-              selectedAlbum: this.selectAlbum
+              selectedAlbum: this.selectAlbum,
+
+              //artists
+              artists: this.state.artists,
+              getArtists: this.getArtists
             })
            :
          null
